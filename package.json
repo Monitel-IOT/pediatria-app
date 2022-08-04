@@ -1,32 +1,53 @@
 {
-  "name": "pediatria-app-backend",
-  "version": "1.0.0",
-  "description": "App para historial pediatras",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+  "name": "Pediatria-App",
+  "jest": {
+    "testEnvironment": "node",
+    "testURL": "http://localhost"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Monitel-IOT/pediatria-app-backend.git"
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test:watch": "cross-env NODE_ENV=test jest --coverage --watch"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Monitel-IOT/pediatria-app-backend/issues"
+  "author": "HenryCodeT <htorres@gmai.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "coveralls": "^3.1.1",
+    "eslint": "^8.4.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
   },
-  "homepage": "https://github.com/Monitel-IOT/pediatria-app-backend#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "cookie-parser": "^1.4.6",
+    "cloudinary": "^1.21.0",
     "cors": "^2.8.5",
-    "express": "^4.18.1",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "epayco-sdk-node": "^1.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.5.0"
+    "lodash": "^4.17.21",
+    "mongoose": "^6.1.1",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.7.2",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0",
+    "socket.io": "^4.4.1",
+    "strip-final-newline": "^2.0.0",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
-  "devDependencies": {
-    "eslint": "^8.20.0"
+  "engines": {
+    "node": "16.x"
   }
 }
