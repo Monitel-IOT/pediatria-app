@@ -153,7 +153,7 @@ const getTemplate = (name, token) => {
       }
     </style>
         <!--user entered Head Start-->
-  
+
        <!--End Head user entered-->
       </head>
       <body>
@@ -488,7 +488,7 @@ const donationSucTemplate = (name, benefited, ammout) => {
       <tbody>
         <tr>
           <td style="font-size:6px; line-height:10px; padding:0px 0px 0px 0px;" valign="top" align="center">
-            
+
           <a href="https://images.pexels.com/photos/2072168/pexels-photo-2072168.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"><img class="max-width" border="0" style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px; max-width:100% !important; width:100%; height:auto !important;" width="600" alt="" data-proportionally-constrained="true" data-responsive="true" src="http://cdn.mcauto-images-production.sendgrid.net/4b279aeebde620d5/74c4f250-bdd6-47b7-9507-2b9bf3d6b052/1880x1253.jpeg"></a></td>
         </tr>
       </tbody>
