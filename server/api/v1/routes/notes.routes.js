@@ -4,6 +4,6 @@ const NoteRouter = express.Router();
 
 const NoteController = require('../controllers/note.controller');
 
-NoteRouter.get('/', NoteController.getHolaMundo);
+NoteRouter.get('', NoteController.getHolaMundo);
 
 module.exports = NoteRouter;
