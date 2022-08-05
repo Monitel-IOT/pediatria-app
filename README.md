@@ -1,3 +1,3 @@
-### START
-npm install 
-npm run dev
+# START
+- npm install 
+- npm run dev
