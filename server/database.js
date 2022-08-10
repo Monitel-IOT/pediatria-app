@@ -4,7 +4,6 @@ const { logger } = require('./config/logger');
 const connect = ({
   username, password, databaseName, url = '',
 }, options = {}) => {
-  // const databaseName = 'donapp';
   let dburl;
   if (username !== undefined && password !== undefined) {
     dburl = `mongodb+srv://${username}:${password}@pediatria-app.5fbhx.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
