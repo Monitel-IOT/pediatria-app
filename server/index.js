@@ -1,13 +1,14 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-unresolved */
 const express = require('express');
-const session = require('express-session');
-const passport = require('passport');
-const { Result } = require('express-validator');
+
+const Sentry = require('@sentry/node');
+const Tracing = require('@sentry/tracing');
 const cors = require('cors');
 
 const api = require('./api/v1');
-const { logger, requestId, requestLog } = require('./config/logger');
+const { requestId, requestLog } = require('./middleware/logger');
+
+const notFound = require('./middleware/notFound');
+const handlerErrors = require('./middleware/handleErrors');
 
 const app = express();
 
@@ -16,50 +17,37 @@ app.use(requestId);
 app.use(requestLog);
 app.use(cors());
 
-/* const whitelist = ['http://localhost:3000', 'https://fast-shelf-59848.herokuapp.com/'];
-app.use(cors({
-  origin: (origin, callback) => {
-    if (whitelist.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('No permitido'));
-    }
-  },
-  methods: ['GET', 'POST', 'DELETE', 'PUT'],
-})); */
-app.use(express.static('public'));
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+
+// ///////////////// SENTRY ////////////////////////////////////////////////////////
+Sentry.init({
+  dsn: 'https://8bffeb9ac23947cf822d59b0c1203f64@o1361778.ingest.sentry.io/6653583',
+  integrations: [
+    // enable HTTP calls tracing
+    new Sentry.Integrations.Http({ tracing: true }),
+    // enable Express.js middleware tracing
+    new Tracing.Integrations.Express({ app }),
+  ],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
 });
+
+// RequestHandler creates a separate execution context using domains, so that every
+// transaction/span/breadcrumb is attached to its own Hub instance
+app.use(Sentry.Handlers.requestHandler());
+// TracingHandler creates a trace for every incoming request
+app.use(Sentry.Handlers.tracingHandler());
 
 // Routes
-// app.use('/api', api);
 app.use('/api/v1', api);
 
-app.use((req, res, next) => {
-  const statusCode = 400;
-  const message = 'Error. Route not found';
-  logger.warn(message);
-  next({ statusCode, message });
-});
-app.use((err, req, res, next) => {
-  if (err instanceof Result) {
-    return res.status(400).json({ errors: err.array() });
-  }
-  const { statusCode = 500, message = 'Unknown error ocurred!' } = err;
-  logger.error(message);
-  return res.status(statusCode).json({ message });
-});
+app.use(notFound);
+
+app.use(Sentry.Handlers.errorHandler());
+
+app.use(handlerErrors);
 
 module.exports = app;
