@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const getEnv = () => {
   let databaseUrl;
+  console.log('NODE ENV', process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development') {
     databaseUrl = process.env.DATABASE_DEV;
   }
@@ -20,18 +21,7 @@ const config = {
   jwtsecret: 'Your secret is here',
   database: {
     name: getEnv(),
-    username: process.env.DATABASE_USERNAME,
-    password: process.env.DATABASE_PASSWORD,
     url: process.env.DATABASE_URL,
-  },
-  cloudinary: {
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  },
-  epaycoKey: {
-    public: process.env.EPAYCO_PUBLIC_KEY,
-    private: process.env.EPAYCO_PRIVATE_KEY,
   },
 };
 module.exports = config;
