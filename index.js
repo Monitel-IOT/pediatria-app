@@ -1,16 +1,14 @@
 const http = require('http');
 const app = require('./server');
-const { connect } = require('./server/database');
+const { connect } = require('./server/config/database');
 const config = require('./server/config');
 const { connect: connectSocket, socket } = require('./server/config/socket');
 
 const { database, port } = config;
 
-console.log('initial config', config);
+console.log('Initial config', config);
 
 connect({
-  username: database.username,
-  password: database.password,
   databaseName: database.name,
   url: database.url,
 });

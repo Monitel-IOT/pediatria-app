@@ -1,17 +1,9 @@
 const mongoose = require('mongoose');
-const { logger } = require('./config/logger');
+const { logger } = require('../middleware/logger');
 
-const connect = ({
-  username, password, databaseName, url = '',
-}, options = {}) => {
-  let dburl;
-  if (username !== undefined && password !== undefined) {
-    dburl = `mongodb+srv://${username}:${password}@pediatria-app.5fbhx.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
-    logger.info('Connected from MongoAtlas');
-  } else {
-    dburl = `mongodb://${url}`;
-    logger.info('Connected from Local');
-  }
+const connect = ({ databaseName, url = '' }, options = {}) => {
+  const dburl = `${url}/${databaseName}`;
+  logger.info('Connected from MongoAtlas');
 
   mongoose.connect(dburl, {
     ...options,
@@ -28,7 +20,7 @@ const connect = ({
   });
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
-      logger.info('Database disconnected, becouse app termination');
+      logger.info('Database disconnected, because app termination');
       process.exit(0);
     });
   });
