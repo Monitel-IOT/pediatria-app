@@ -1,9 +1,8 @@
 const express = require('express');
 
-const NoteRouter = require('./routes/notes.routes');
+const AtencionRouter = require('./routes/atencion.routes');
 
 const router = express.Router();
 
-router.use('/notes', NoteRouter);
-
+router.use('/atencion', AtencionRouter);
 module.exports = router;
