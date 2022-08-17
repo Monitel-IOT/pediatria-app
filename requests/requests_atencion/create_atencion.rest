@@ -1,0 +1,17 @@
+POST http://localhost:5000/api/v1/atencion HTTP/1.1
+content-type: application/json
+
+{
+  "AtencionId":"3",
+  "FechaAtencion":"2022-08-01",
+  "DiagnosticoProl": [
+  {
+    "Diagnostico": "diagnostico 1",
+    "Edad": "03"
+  },
+  {
+    "Diagnostico": "diagnostico 2",
+    "Edad": "03"
+  }
+  ]
+}
