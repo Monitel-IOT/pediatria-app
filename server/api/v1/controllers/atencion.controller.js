@@ -11,6 +11,18 @@ const createAtencion = (request, response, next) => {
     });
 };
 
+const getAtencionById = (request, response, next) => {
+  Atencion.findById(request.params.id)
+    .then((atencion) => {
+      response.statusMessage = 'Atencion enviada';
+      response.status(200).json(atencion);
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
 module.exports = {
   createAtencion,
+  getAtencionById,
 };
