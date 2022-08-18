@@ -2,16 +2,62 @@ POST http://localhost:5000/api/v1/atencion HTTP/1.1
 content-type: application/json
 
 {
-  "AtencionId":"3",
-  "FechaAtencion":"2022-08-01",
-  "DiagnosticoProl": [
-  {
-    "Diagnostico": "diagnostico 1",
-    "Edad": "03"
-  },
-  {
-    "Diagnostico": "diagnostico 2",
-    "Edad": "03"
-  }
-  ]
+    "FechaAtencion": "2022/02/02",
+    "Peso": 5.78,
+    "Talla": 78,
+    "Edad": "2 años",
+    "PerimetroEncefalico": 15,
+    "IndiceMasaCop": 5,
+    "DiagnosticoProl":[
+        {
+            "Diagnostico":"Diabetes",
+            "Edad": "3 meses"
+        },
+        {
+            "Diagnostico":"No se",
+            "Edad": "2 meses"
+        }
+    ],
+    "CaracteristicasAtencion":{
+        "TiempoEnfer":"3 dias",
+        "Relato": "Se encontraba con malestar general",
+        "Reevaluacion": "Se reevaluara en 3 dias"
+    },
+    "FuncionesVitales": {
+        "FR":37,
+        "FC":15,
+        "T": 36,
+        "Saturacion": 95
+    },
+    "Diagnostico":[
+        {"NombreDiagnostico":"Gripe"},
+        {"NombreDiagnostico":"Infeccion estomacal"}
+    ],
+    "TratamientoLargo":[
+        {
+            "NombreTratamientoLargo":"Eutirox",
+            "Estado": "Activo",
+            "FechaSuspencion":null
+        },
+        {
+            "NombreTratamientoLargo":"Ranttt",
+            "Estado": "Activo",
+            "FechaSuspencion":null
+        }
+    ],
+    "Tratamiento":[
+        {"NombreTratamiento":"Ibuprofeno"},
+        {"NombreTratamiento":"Paracetamol"}
+    ],
+    "ExamenesAuxiliares":[
+        {"Examen":"Orina"},
+        {"Examen":"Sangre"}
+    ],
+    "Percentiles": {
+        "PercentilPeso":37,
+        "PercentilTalla":15,
+        "PercentilMC": 36
+    },
+    "Estado": 1
 }
+
