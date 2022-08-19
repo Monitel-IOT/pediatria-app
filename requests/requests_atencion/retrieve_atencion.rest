@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/v1/atencion/62fd94a48c335e7584318719 HTTP/1.1
