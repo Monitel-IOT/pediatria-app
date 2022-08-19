@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const atencion = new mongoose.Schema({
+const appointmentSchema = mongoose.Schema({
   AtencionId: String,
   FechaAtencion: String,
   Peso: String,
@@ -53,9 +53,8 @@ const atencion = new mongoose.Schema({
   Estado: String,
   FechaCreacion: String,
   FechaModificacion: String,
-
 }, { timestamps: true });
 
-const Atencion = mongoose.model('Atencion', atencion);
+const Appointment = mongoose.model('Appointment', appointmentSchema);
 
-module.exports = Atencion;
+module.exports = Appointment;

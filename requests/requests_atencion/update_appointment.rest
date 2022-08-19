@@ -1,8 +1,8 @@
-POST http://localhost:5000/api/v1/appointment HTTP/1.1
+PUT http://localhost:5000/api/v1/appointment/62ff0234620436d5daadc8c2 HTTP/1.1
 content-type: application/json
 
 {
-    "FechaAtencion": "2022/08/18",
+    "FechaAtencion": "2022/08/20",
     "Peso": 5.78,
     "Talla": 78,
     "Edad": "2 años",
