@@ -11,7 +11,7 @@ const getAllPatientHandler = async (req, res, next) => {
     next(error);
   }
 };
-
+/*prueba*/
 const createNewPatientHandler = async (req, res, next) => {
   try {
     const patient = req.body;
