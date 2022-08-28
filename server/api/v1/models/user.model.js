@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema(
     dni: { type: String },
     phone: { type: String },
     level: { type: String }, // super_admin, admin, client
+    patients: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Patient',
+    }],
   },
   { timestamps: true },
 );

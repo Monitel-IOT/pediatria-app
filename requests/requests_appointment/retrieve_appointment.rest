@@ -1,0 +1,1 @@
+GET http://localhost:5000/api/v1/appointment/630ad75352f5f98f0a476423 HTTP/1.1
