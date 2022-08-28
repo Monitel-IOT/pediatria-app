@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const User = require('../models/user.model');
 
 async function createNewUser(user) {
@@ -27,6 +28,13 @@ async function updateUser(id, user) {
   return newUser;
 }
 
+async function addNewPatientToUser(userId, patientId) {
+  const updatedUser = await User
+    .findByIdAndUpdate(userId, { $push: { patients: patientId } }, { new: true });
+  console.log(updatedUser);
+  return updatedUser;
+}
+
 async function getAllUsers() {
   const users = await User.find({}).sort({ date: -1 });
   return users;
@@ -37,4 +45,5 @@ module.exports = {
   createNewUser,
   getUserById,
   getAllUsers,
+  addNewPatientToUser,
 };
