@@ -1,19 +1,19 @@
-POST http://localhost:5000/api/v1/patient HTTP/1.1
+POST http://localhost:5000/api/v1/patient/createPatientToUserHandler/630ba9e3660e3b400e4d3531 HTTP/1.1
 content-type: application/json
 
 {
-    "NumberHC": "00001",
-    "DNI": "75687381",
-    "Name ":   "Lisbeth",
+    "NumberHC": 32,
+    "DNI": "75687383",
+    "Name": "Lisbeth",
     "LastName": "Ortogorin Condori",
     "DateBirth":  "1996/02/08",
     "Gender":  "F",
-    "BirthWeight":  "3.78",
+    "BirthWeight":  3.78,
     "Childbirth":   "Natural",
-    "Apgar":    3,
+    "Apgar":    "3",
     "SupplementaryFeeding":   "NO",
-    "Lactation":  "12 meses",
-    "Gestation":    "9 meses",
+    "Lactation": "12 meses",
+    "Gestation": "9 meses",
      "Vaccines": [{
         "Name":"HCD" ,
         "Eigth": "3 meses"
@@ -24,4 +24,3 @@ content-type: application/json
     }],
     "Estate": 1
 }
-
