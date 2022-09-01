@@ -2,7 +2,7 @@ POST http://localhost:5000/api/v1/patient HTTP/1.1
 content-type: application/json
 
 {
-    "NumberHC": 2,
+    "NumberHC": 3,
     "DNI": "75687381",
     "Name":   "Lisbeth",
     "LastName": "Ortogorin Condori",
