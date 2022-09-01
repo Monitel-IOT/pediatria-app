@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
 const { server: app, listen } = require('../index');
-const User = require('../server/api/v1/user/model');
+const User = require('../server/api/v1/models/user.model');
 
 const server = supertest(app);
 
@@ -18,11 +18,13 @@ const validUser = {
   name: 'user1',
   surname: 'test1',
   email: 'user1@gmail.com',
-  password: 'P4ssword',
+  dni: '73048140',
+  phone: '981540121',
+  level: 'client', // super_admin, admin, client
 };
 
 const postUser = (user = validUser) => {
-  const agent = server.post('/api/user/signup');
+  const agent = server.post('/api/v1/user');
   return agent.send(user);
 };
 
@@ -43,18 +45,14 @@ describe('User Registration', () => {
     expect(savedUser.name).toBe('user1');
     expect(savedUser.email).toBe('user1@gmail.com');
   });
-  it('hashes the password in database', async () => {
-    await postUser();
-    const userList = await User.find({});
-    const savedUser = userList[0];
-    expect(savedUser.password).not.toBe('P4ssword');
-  });
-  it('returns 400 when name is null', async () => {
+  it('returns 409 when name is null', async () => {
     const response = await postUser({
       name: null,
       surname: 'test1',
-      email: 'user1@gmail.com',
-      password: 'P4ssword',
+      email: null,
+      dni: '73048140',
+      phone: '981540121',
+      level: 'client',
     });
     expect(response.status).toBe(400);
   });
@@ -63,19 +61,10 @@ describe('User Registration', () => {
       name: null,
       surname: 'test1',
       email: 'user1@gmail.com',
-      password: 'P4ssword',
+      dni: '73048140',
+      phone: '981540121',
+      level: 'client',
     });
-    const { body } = response;
-    expect(body.errors).not.toBeUndefined();
-  });
-  it('returns errors for both when name and email is null', async () => {
-    const response = await postUser({
-      name: null,
-      surname: 'test1',
-      email: null,
-      password: 'P4ssword',
-    });
-    const { body } = response;
-    expect(body.errors.map((err) => err.param)).toEqual(['name', 'email']);
+    expect(response.error).toBeUndefined();
   });
 });
