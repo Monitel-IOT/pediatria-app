@@ -2,7 +2,7 @@ POST http://localhost:5000/api/v1/patient/createPatientToUserHandler/630ba9e3660
 content-type: application/json
 
 {
-    "NumberHC": 32,
+    "NumberHC": 34,
     "DNI": "75687383",
     "Name": "Lisbeth",
     "LastName": "Ortogorin Condori",
