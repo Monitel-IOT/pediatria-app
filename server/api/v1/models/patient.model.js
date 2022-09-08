@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const patientSchema = mongoose.Schema(
   {
-    NumberHC: { type: Number, required: true },
+    NumberHC: { type: String, required: true },
     DNI: { type: String, required: false },
     Name: { type: String, required: true },
     LastName: { type: String, required: true },
@@ -11,13 +11,13 @@ const patientSchema = mongoose.Schema(
     BirthWeight: { type: Number, required: false },
     Childbirth: { type: String, required: false },
     Apgar: { type: String, required: false },
-    SupplementaryFeeding: { type: String, required: false },
+    SupplementaryFeeding: { type: Boolean, required: false },
     Lactation: { type: String, required: false },
     Gestation: { type: String, required: false },
     Vaccines: [
       {
         Name: { type: String, required: false },
-        Eigth: { type: String, required: false },
+        age: { type: String, required: false },
       },
     ],
     Estate: { type: Boolean, required: true },
