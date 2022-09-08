@@ -11,17 +11,16 @@ content-type: application/json
     "BirthWeight":  "3.78",
     "Childbirth":   "Natural",
     "Apgar":    3,
-    "SupplementaryFeeding":   "NO",
+    "SupplementaryFeeding":   1,
     "Lactation":  "12 meses",
     "Gestation":    "9 meses",
      "Vaccines": [{
         "Name":"HCD" ,
-        "Eigth": "3 meses"
+        "age": "3 meses"
     },
     {
         "Name":"HB" ,
-        "Eigth": "2 meses"
+        "age": "2 meses"
     }],
     "Estate": 1
 }
-

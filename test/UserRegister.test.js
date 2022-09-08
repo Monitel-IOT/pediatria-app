@@ -1,17 +1,12 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
-const { server: app, listen } = require('../index');
+const { server, listen } = require('../index');
 const User = require('../server/api/v1/models/user.model');
 
-const server = supertest(app);
+const api = supertest(server);
 
 beforeEach(async () => {
   await User.deleteMany({});
-});
-
-afterAll(() => {
-  mongoose.connection.close();
-  listen.close();
 });
 
 const validUser = {
@@ -24,7 +19,7 @@ const validUser = {
 };
 
 const postUser = (user = validUser) => {
-  const agent = server.post('/api/v1/user');
+  const agent = api.post('/api/v1/user');
   return agent.send(user);
 };
 
@@ -56,15 +51,9 @@ describe('User Registration', () => {
     });
     expect(response.status).toBe(400);
   });
-  it('returns errors field in response body when validation error occurs', async () => {
-    const response = await postUser({
-      name: null,
-      surname: 'test1',
-      email: 'user1@gmail.com',
-      dni: '73048140',
-      phone: '981540121',
-      level: 'client',
-    });
-    expect(response.error).toBeUndefined();
+
+  afterAll(() => {
+    mongoose.connection.close();
+    listen.close();
   });
 });
