@@ -7,5 +7,5 @@ content-type: application/json
 "email":null,
 "dni":"123456778",
 "phone":"1234566",
-"level":"admin"
+"level":"admin",
 }
