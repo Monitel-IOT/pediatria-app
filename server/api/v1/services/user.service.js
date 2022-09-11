@@ -39,6 +39,15 @@ async function getAllUsers() {
   const users = await User.find({}).sort({ date: -1 });
   return users;
 }
+/**
+ * Function to return all patients by user id
+ * @param {String} userId User Id
+ * @returns List of patients
+ */
+async function getListPatientsByUserId(userId) {
+  const user = await User.findById(userId).populate('patients');
+  return user.patients;
+}
 
 module.exports = {
   updateUser,
@@ -46,4 +55,5 @@ module.exports = {
   getUserById,
   getAllUsers,
   addNewPatientToUser,
+  getListPatientsByUserId,
 };
