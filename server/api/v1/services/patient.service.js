@@ -1,13 +1,22 @@
+/* eslint-disable no-underscore-dangle */
 const Patient = require('../models/patient.model');
+const { addNewPatientToUser } = require('./user.service');
 
-async function createNewPatient(patient) {
+/**
+ *Esta funcion creara un paciente y lo agregara a su respectivo usuario por el id proporcionado
+ * @param {String} userId Id del usuario al que pertenece el paciente
+ * @param {Object} patient Nuevo paciente que sera creado
+ * @returns Nuevo paciente creado
+ */
+async function createNewPatient(userId, patient) {
   let newPatient = await Patient.findOne({ NumberHC: patient.NumberHC }) || null;
-  console.log(newPatient);
   if (newPatient !== null) {
     throw new Error('The patient already exists');
   }
   newPatient = new Patient(patient);
   await newPatient.save();
+  await addNewPatientToUser(userId, newPatient._id);
+
   return newPatient;
 }
 
