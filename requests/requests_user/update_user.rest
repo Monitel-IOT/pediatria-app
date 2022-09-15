@@ -1,8 +1,8 @@
-POST http://localhost:5001/api/v1/user HTTP/1.1
+PUT http://localhost:5001/api/v1/user/63227f558df0fd44529b0fe5 HTTP/1.1
 content-type: application/json
 
 {
-"name":"test12",
+"name":"test17",
 "surname":"surname test",
 "email":"test17@gmail.com",
 "dni":"123456778",

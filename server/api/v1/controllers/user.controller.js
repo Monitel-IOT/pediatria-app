@@ -1,4 +1,6 @@
-const { getAllUsers, createNewUser, getListPatientsByUserId } = require('../services/user.service');
+const {
+  getAllUsers, createNewUser, getListPatientsByUserId, getUserById, updateUser, deleteLogicUser,
+} = require('../services/user.service');
 
 const getAllUsersHandler = async (req, res, next) => {
   try {
@@ -29,6 +31,63 @@ const createNewUserHandler = async (req, res, next) => {
     next(error);
   }
 };
+
+/**
+ * Controller to return a user by id
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+const getUserByIdHandler = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const newUser = await getUserById(userId);
+    res.status(200).json({
+      data: newUser,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+/**
+ * Controller to update a user by id
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+const updateUserByIdHandler = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = req.body;
+    const newUser = await updateUser(userId, user);
+    res.status(200).json({
+      data: newUser,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+/**
+ * Controller to return a user by id
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+const deleteUserByIdHandler = async (req, res, next) => {
+  console.log('aqui');
+  try {
+    const userId = req.params.id;
+    console.log(userId);
+    await deleteLogicUser(userId);
+    res.status(200).json({ msg: 'User deleted' });
+  } catch (error) {
+    console.log({ error });
+    next(error);
+  }
+};
+
 /**
  * Controller to return all patients by user id
  * @param {*} req
@@ -47,8 +106,12 @@ const getAllPatientsByUserIdHandler = async (req, res, next) => {
     next(error);
   }
 };
+
 module.exports = {
   getAllUsersHandler,
   createNewUserHandler,
+  getUserByIdHandler,
   getAllPatientsByUserIdHandler,
+  updateUserByIdHandler,
+  deleteUserByIdHandler,
 };

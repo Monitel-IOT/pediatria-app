@@ -8,7 +8,7 @@ async function createNewUser(user) {
       msg: 'The user already exists',
     };
   }
-  newUser = new User(user);
+  newUser = new User({ ...user, state: 1 });
   await newUser.save();
   return newUser;
 }
@@ -21,6 +21,16 @@ async function getUserById(id) {
     };
   }
   return user;
+}
+
+async function deleteLogicUser(id) {
+  const newUser = await User.findByIdAndUpdate(
+    id,
+    { $set: { state: 0 } },
+    { new: true },
+  );
+  console.log(newUser);
+  return newUser;
 }
 
 async function updateUser(id, user) {
@@ -56,4 +66,5 @@ module.exports = {
   getAllUsers,
   addNewPatientToUser,
   getListPatientsByUserId,
+  deleteLogicUser,
 };
