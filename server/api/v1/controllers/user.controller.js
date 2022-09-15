@@ -17,8 +17,13 @@ const createNewUserHandler = async (req, res, next) => {
     const user = req.body;
     const newUser = await createNewUser(user);
     res.status(200).json({
-      data: newUser,
-      status: 'OK',
+      data: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        token: user.token,
+      },
+      status: 'Ok',
     });
   } catch (error) {
     next(error);
