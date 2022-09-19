@@ -3,11 +3,11 @@ const User = require('../models/user.model');
 
 async function createNewUser(user) {
   let newUser = await User.findOne({ email: user.email }) || null;
-  if (newUser !== null) {
+  /* if (newUser !== null) {
     return {
       msg: 'The user already exists',
     };
-  }
+  } */
   newUser = new User({ ...user, state: 1 });
   await newUser.save();
   return newUser;

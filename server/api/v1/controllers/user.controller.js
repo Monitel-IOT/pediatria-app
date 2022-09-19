@@ -1,3 +1,4 @@
+const firebaseAdmin = require('../../../config/firebase');
 const {
   getAllUsers, createNewUser, getListPatientsByUserId, getUserById, updateUser, deleteLogicUser,
 } = require('../services/user.service');
@@ -15,19 +16,32 @@ const getAllUsersHandler = async (req, res, next) => {
 };
 
 const createNewUserHandler = async (req, res, next) => {
+  const { email, name, password } = req.body;
   try {
-    const user = req.body;
-    const newUser = await createNewUser(user);
-    res.status(200).json({
-      data: {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
-        token: user.token,
-      },
-      status: 'Ok',
+    const newFirebaseUser = await firebaseAdmin.auth.createUser({
+      email,
+      password,
     });
+    if (newFirebaseUser) {
+      const newUser = await createNewUser({
+        email,
+        name,
+        firebaseId: newFirebaseUser.uid,
+      });
+
+      res.status(200).json({
+        data: {
+          id: newUser.id,
+          email: newUser.email,
+          firebaseId: newUser.firebaseId,
+        },
+        success: 'Cuenta creada exitosamente, Por favor inicia sesión',
+      });
+    }
   } catch (error) {
+    if (error.code) {
+      res.status(400).json({ error: error.code });
+    }
     next(error);
   }
 };
