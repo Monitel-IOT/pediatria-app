@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const appointmentSchema = mongoose.Schema({
-  FechaAtencion: { type: Date, require: true },
-  Peso: { type: Number, require: false },
-  Talla: { type: Number, require: false },
-  Edad: { type: String, require: false },
+  AppointmentDate: { type: Date, require: true },
+  Weight: { type: Number, require: false },
+  Size: { type: Number, require: false },
+  Age: { type: String, require: false },
   PerimetroEncefalico: { type: Number, require: false },
   IndiceMasaCop: { type: Number, require: false },
   DiagnosticoProl: [{
     Diagnostico: { type: String, require: false },
-    Edad: { type: String, require: false },
+    Age: { type: String, require: false },
   }],
   CaracteristicasAtencion: {
     TiempoEnfer: { type: String, require: false },
