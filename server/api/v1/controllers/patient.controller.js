@@ -28,8 +28,36 @@ const createPatientToUserHandler = async (req, res, next) => {
     next(error);
   }
 };
+const getPatientByIdHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const patient = await getPatientById(id);
+    res.status(200).json({
+      data: patient,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updatePatienttHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const patient = req.body;
+    const newPatient = await updatePatient(id, appointment);
+    res.status(200).json({
+      data: newPatient,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   getAllPatientHandler,
   createPatientToUserHandler,
+  getPatientByIdHandler,
+  updatePatienttHandler
 };
