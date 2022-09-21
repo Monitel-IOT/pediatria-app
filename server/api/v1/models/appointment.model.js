@@ -9,7 +9,7 @@ const appointmentSchema = mongoose.Schema({
   IndiceMasaCop: { type: Number, require: false },
   DiagnosticoProl: [{
     Diagnostico: { type: String, require: false },
-    Edad: { type: String, require: false },
+    Age: { type: String, require: false },
   }],
   CaracteristicasAtencion: {
     TiempoEnfer: { type: String, require: false },
