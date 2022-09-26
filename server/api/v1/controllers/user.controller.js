@@ -55,9 +55,10 @@ const createNewUserHandler = async (req, res, next) => {
 const getUserByIdHandler = async (req, res, next) => {
   try {
     const userId = req.params.id;
+    const vaccinesAvailable = { vaccinesAvailable: ['BCG', 'Hepatitis B', 'AMA', 'INF 1 y 2', 'SPR', '1 P+PO+RO+N', '2 P+PO+RO+N', '3 P+PO', 'Refuerzo SPR'] };
     const newUser = await getUserById(userId);
     res.status(200).json({
-      data: newUser,
+      data: { newUser, ...vaccinesAvailable },
       status: 'OK',
     });
   } catch (error) {
