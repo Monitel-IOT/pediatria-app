@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-const { getAllPatients, createNewPatient } = require('../services/patient.service');
+const { getAllPatients, createNewPatient, getPatientById } = require('../services/patient.service');
 
 const getAllPatientHandler = async (req, res, next) => {
   try {
@@ -29,7 +29,21 @@ const createPatientToUserHandler = async (req, res, next) => {
   }
 };
 
+const getPatientByIdHandler = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const patient = await getPatientById(id);
+    res.status(200).json({
+      data: patient,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllPatientHandler,
   createPatientToUserHandler,
+  getPatientByIdHandler,
 };
