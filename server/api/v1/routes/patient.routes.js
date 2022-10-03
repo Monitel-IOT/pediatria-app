@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.get('', patientController.getAllPatientHandler);
 router.post('/:id', patientController.createPatientToUserHandler);
+router.get('/:id', patientController.getPatientByIdHandler);
 
 module.exports = router;
