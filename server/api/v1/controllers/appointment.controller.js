@@ -1,4 +1,6 @@
-const { createNewAppointment, getAppointmentById, updateAppointment } = require('../services/appointment.service');
+const {
+  createNewAppointment, getAppointmentById, updateAppointment, deleteAppointment,
+} = require('../services/appointment.service');
 
 const createNewAppointmentHandler = async (req, res, next) => {
   try {
@@ -40,8 +42,21 @@ const updateAppointmentHandler = async (req, res, next) => {
   }
 };
 
+const deleteAppointmentHandler = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    console.log(userId);
+    await deleteAppointment(userId);
+    res.status(200).json({ msg: 'Appointment deleted' });
+  } catch (error) {
+    console.log({ error });
+    next(error);
+  }
+};
+
 module.exports = {
   createNewAppointmentHandler,
   getAppointmentByIdHandler,
   updateAppointmentHandler,
+  deleteAppointmentHandler,
 };

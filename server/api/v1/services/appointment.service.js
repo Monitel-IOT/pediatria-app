@@ -21,8 +21,18 @@ async function updateAppointment(id, appointment) {
   return newAppointment;
 }
 
+async function deleteAppointment(id) {
+  const appointmentToDelete = await Appointment.findByIdAndUpdate(
+    id,
+    { $set: { Estado: 0 } },
+    { new: true },
+  );
+  return appointmentToDelete;
+}
+
 module.exports = {
   createNewAppointment,
   getAppointmentById,
   updateAppointment,
+  deleteAppointment,
 };
