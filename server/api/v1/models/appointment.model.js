@@ -36,7 +36,7 @@ const appointmentSchema = mongoose.Schema({
   ],
   treatment: [
     {
-      nombreTratamiento: { type: String, require: false },
+      nameTreatment: { type: String, require: false },
     },
   ],
   auxiliaryExams: [
