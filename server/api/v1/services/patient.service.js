@@ -9,11 +9,11 @@ const { addNewPatientToUser } = require('./user.service');
  * @returns Nuevo paciente creado
  */
 async function createNewPatient(userId, patient) {
-  let newPatient = await Patient.findOne({ NumberHC: patient.NumberHC }) || null;
-  if (newPatient !== null) {
-    throw new Error('The patient already exists');
-  }
-  newPatient = new Patient(patient);
+  // let newPatient = await Patient.findOne({ numberHC: patient.numberHC }) || null;
+  // if (newPatient !== null) {
+  //   throw new Error('The patient already exists');
+  // }
+  const newPatient = new Patient(patient);
   await newPatient.save();
   await addNewPatientToUser(userId, newPatient._id);
 
