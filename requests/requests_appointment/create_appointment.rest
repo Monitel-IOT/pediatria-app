@@ -1,63 +1,62 @@
-POST http://localhost:5000/api/v1/appointment HTTP/1.1
+POST http://localhost:5001/api/v1/appointment HTTP/1.1
 content-type: application/json
 
 {
-    "FechaAtencion": "2022/08/18",
-    "Peso": 5.78,
-    "Talla": 78,
-    "Edad": "2 años",
-    "PerimetroEncefalico": 15,
-    "IndiceMasaCop": 5,
-    "DiagnosticoProl":[
+    "appointmentDate": "2022/08/18",
+    "weight": 5.78,
+    "size": 78,
+    "age": "2 años",
+    "brainPerimeter": 15,
+    "bodyMassIndex": 5,
+    "prolongedDiagnosis":[
         {
-            "Diagnostico":"Diabetes",
-            "Edad": "3 meses"
+            "diagnosis":"Diabetes",
+            "age": "3 meses"
         },
         {
-            "Diagnostico":"No se",
-            "Edad": "2 meses"
+            "diagnosis":"No se",
+            "age": "2 meses"
         }
     ],
-    "CaracteristicasAtencion":{
-        "TiempoEnfer":"3 dias",
+    "characteristicsAttention":{
+        "sickTime":"3 dias",
         "Relato": "Se encontraba con malestar general",
         "Reevaluacion": "Se reevaluara en 3 dias"
     },
-    "FuncionesVitales": {
-        "FR":37,
-        "FC":15,
-        "T": 36,
-        "Saturacion": 95
+    "vitalFunctions": {
+        "fr":37,
+        "fc":15,
+        "t": 36,
+        "saturacion": 95
     },
-    "Diagnostico":[
-        {"NombreDiagnostico":"Gripe"},
-        {"NombreDiagnostico":"Infeccion estomacal"}
+    "diagnosis":[
+        {"diagnosticName":"Gripe"},
+        {"diagnosticName":"Infeccion estomacal"}
     ],
-    "TratamientoLargo":[
+    "longTreatment":[
         {
-            "NombreTratamientoLargo":"Eutirox",
-            "Estado": "Activo",
-            "FechaSuspencion":null
+            "longTreatmentName":"Eutirox",
+            "status": 1,
+            "suspensionDate":null
         },
         {
-            "NombreTratamientoLargo":"Ranttt",
-            "Estado": "Activo",
-            "FechaSuspencion":null
+            "longTreatmentName":"Ranttt",
+            "status": 1,
+            "suspensionDate":null
         }
     ],
-    "Tratamiento":[
-        {"NombreTratamiento":"Ibuprofeno"},
-        {"NombreTratamiento":"Paracetamol"}
+    "treatment":[
+        {"nameTreatment":"Ibuprofeno"},
+        {"nameTreatment":"Paracetamol"}
     ],
-    "ExamenesAuxiliares":[
-        {"Examen":"Orina"},
-        {"Examen":"Sangre"}
+    "auxiliaryExams":[
+        {"exams":"Orina"},
+        {"exams":"Sangre"}
     ],
-    "Percentiles": {
-        "PercentilPeso":37,
-        "PercentilTalla":15,
-        "PercentilMC": 36
+    "percentiles": {
+        "percentileWeight":37,
+        "heightPercentile":15,
+        "percentilMC": 36
     },
-    "Estado": 1
+    "status": 1
 }
-
