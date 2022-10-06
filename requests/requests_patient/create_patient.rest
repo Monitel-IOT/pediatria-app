@@ -1,27 +1,25 @@
 // /api/v1/patient/:IdUser
-POST http://localhost:5001/api/v1/patient/631e09cad65c7b1022d7be4a HTTP/1.1
+POST http://localhost:5001/api/v1/patient/633e3ff289e2c859d601c571 HTTP/1.1
 content-type: application/json
 
 {
-    "NumberHC": 38,
-    "DNI": "75687383",
-    "Name": "Lisbeth",
-    "LastName": "Ortogorin Condori",
-    "DateBirth":  "1996/02/08",
-    "Gender":  "F",
-    "BirthWeight":  3.78,
-    "Childbirth":   "Natural",
-    "Apgar":    "3",
-    "SupplementaryFeeding":   1,
-    "Lactation": "12 meses",
-    "Gestation": "9 meses",
-    "Vaccines": [{
-        "Name":"HCD" ,
-        "age": "3 meses"
-    },
-    {
-        "Name":"HB" ,
-        "age": "2 meses"
-    }],
-    "Estate": 1
+  "numberHC":"HC-0001",
+  "dni":"75687383",
+  "name":"Lisbeth",
+  "lastname":"Ortogorin Condori",
+  "birthDate":"1996/02/08",
+  "gender": "F",
+  "birthWeight":3.78,
+  "childBirth":"Natural",
+  "apgar":"3",
+  "supplementaryFeeding":1,
+  "lactation": "12 meses",
+  "gestation": "9 meses",
+  "vaccines": [{
+    "name": "HCD"
+  },
+  {
+    "name": "HB"
+  }],
+  "state": 1
 }

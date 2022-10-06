@@ -2,25 +2,24 @@ const mongoose = require('mongoose');
 
 const patientSchema = mongoose.Schema(
   {
-    NumberHC: { type: String, required: true },
-    DNI: { type: String, required: false },
-    Name: { type: String, required: true },
-    LastName: { type: String, required: true },
-    DateBirth: { type: Date, required: true },
-    Gender: { type: String, required: true },
-    BirthWeight: { type: Number, required: false },
-    Childbirth: { type: String, required: false },
-    Apgar: { type: String, required: false },
-    SupplementaryFeeding: { type: Boolean, required: false },
-    Lactation: { type: String, required: false },
-    Gestation: { type: String, required: false },
-    Vaccines: [
+    numberHC: { type: String, required: false },
+    dni: { type: String, required: false },
+    name: { type: String, required: true },
+    lastname: { type: String, required: true },
+    birthDate: { type: Date, required: true },
+    gender: { type: String, required: true },
+    birthWeight: { type: Number, required: false },
+    childBirth: { type: String, required: false },
+    apgar: { type: String, required: false },
+    supplementaryFeeding: { type: Boolean, required: false },
+    lactation: { type: String, required: false },
+    gestation: { type: String, required: false },
+    vaccines: [
       {
-        Name: { type: String, required: false },
-        age: { type: String, required: false },
+        name: { type: String, required: false },
       },
     ],
-    Estate: { type: Boolean, required: true },
+    state: { type: Boolean, required: true },
   },
   { timestamps: true },
 );
