@@ -30,7 +30,7 @@ const appointmentSchema = mongoose.Schema({
   longTreatment: [
     {
       longTreatmentName: { type: String, require: false },
-      status: { type: Boolean, require: false },
+      state: { type: Boolean, require: false },
       suspensionDate: { type: Date, require: false },
     },
   ],
@@ -49,7 +49,7 @@ const appointmentSchema = mongoose.Schema({
     heightPercentile: { type: Number, require: false },
     percentilMC: { type: Number, require: false },
   },
-  status: { type: Boolean, require: true },
+  state: { type: Boolean, require: true },
 }, { timestamps: true });
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);

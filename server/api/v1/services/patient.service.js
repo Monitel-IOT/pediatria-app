@@ -44,7 +44,7 @@ async function getAllPatients() {
 async function deletePatient(id) {
   const appointmentToDelete = await Patient.findByIdAndUpdate(
     id,
-    { $set: { Estate: false } },
+    { $set: { state: 0 } },
     { new: true },
   );
   return appointmentToDelete;
