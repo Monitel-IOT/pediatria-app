@@ -24,7 +24,7 @@ async function updateAppointment(id, appointment) {
 async function deleteAppointment(id) {
   const appointmentToDelete = await Appointment.findByIdAndUpdate(
     id,
-    { $set: { Estado: 0 } },
+    { $set: { state: 0 } },
     { new: true },
   );
   return appointmentToDelete;
