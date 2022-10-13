@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
@@ -17,6 +19,12 @@ const userSchema = mongoose.Schema(
   },
   { timestamps: true },
 );
+
+userSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (doc, ret) => { delete ret._id; },
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
