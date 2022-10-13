@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 const patientSchema = mongoose.Schema(
@@ -16,6 +18,7 @@ const patientSchema = mongoose.Schema(
     gestation: { type: String, required: false },
     vaccines: [
       {
+        _id: false,
         name: { type: String, required: false },
       },
     ],
@@ -23,6 +26,12 @@ const patientSchema = mongoose.Schema(
   },
   { timestamps: true },
 );
+
+patientSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (doc, ret) => { delete ret._id; },
+});
 
 const Patient = mongoose.model('Patient', patientSchema);
 module.exports = Patient;
