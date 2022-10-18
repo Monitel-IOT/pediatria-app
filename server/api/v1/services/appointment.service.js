@@ -1,8 +1,11 @@
 const Appointment = require('../models/appointment.model');
+const { addNewAppointmentToPatient } = require('./patient.service');
 
-async function createNewAppointment(appointment) {
+async function createNewAppointment(patientId, appointment) {
   const newAppointment = new Appointment(appointment);
   await newAppointment.save();
+  await addNewAppointmentToPatient(patientId, newAppointment.id);
+
   return newAppointment;
 }
 

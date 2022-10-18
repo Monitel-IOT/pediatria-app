@@ -1,8 +1,8 @@
-POST http://localhost:5001/api/v1/appointment HTTP/1.1
+POST http://localhost:5001/api/v1/appointment/634df7b9128e2ed1e2143f07 HTTP/1.1
 content-type: application/json
 
 {
-    "appointmentDate": "2022/08/18",
+    "appointmentDate": "2023/08/18",
     "weight": 5.78,
     "size": 78,
     "age": "2 años",

@@ -23,6 +23,10 @@ const patientSchema = mongoose.Schema(
       },
     ],
     state: { type: Boolean, required: true },
+    appointments: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Appointment',
+    }],
   },
   { timestamps: true },
 );
