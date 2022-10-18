@@ -1,0 +1,1 @@
+GET http://localhost:5001/api/v1/patient/634df7b9128e2ed1e2143f07/appointments HTTP/1.1

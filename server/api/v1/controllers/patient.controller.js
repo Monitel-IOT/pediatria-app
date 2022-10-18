@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const {
-  getAllPatients, createNewPatient, getPatientById, deletePatient,
+  getAllPatients, createNewPatient, getPatientById, deletePatient, getListAppointmentsByPatientId,
 } = require('../services/patient.service');
 
 const getAllPatientHandler = async (req, res, next) => {
@@ -56,9 +56,23 @@ const deletePatientHandler = async (req, res, next) => {
   }
 };
 
+const getAllAppointmentsByPatientHandler = async (req, res, next) => {
+  try {
+    const patientId = req.params.id;
+    const appointments = await getListAppointmentsByPatientId(patientId);
+    res.status(200).json({
+      data: appointments,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllPatientHandler,
   createPatientToUserHandler,
   getPatientByIdHandler,
   deletePatientHandler,
+  getAllAppointmentsByPatientHandler,
 };

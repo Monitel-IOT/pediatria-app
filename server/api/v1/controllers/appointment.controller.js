@@ -5,7 +5,9 @@ const {
 const createNewAppointmentHandler = async (req, res, next) => {
   try {
     const appointment = req.body;
-    const newAppointment = await createNewAppointment(appointment);
+    const patientId = req.params.id;
+
+    const newAppointment = await createNewAppointment(patientId, appointment);
     res.status(200).json({
       data: newAppointment,
       status: 'OK',
@@ -44,9 +46,9 @@ const updateAppointmentHandler = async (req, res, next) => {
 
 const deleteAppointmentHandler = async (req, res, next) => {
   try {
-    const userId = req.params.id;
-    console.log(userId);
-    await deleteAppointment(userId);
+    const appointmentId = req.params.id;
+    console.log(appointmentId);
+    await deleteAppointment(appointmentId);
     res.status(200).json({ msg: 'Appointment deleted' });
   } catch (error) {
     console.log({ error });
