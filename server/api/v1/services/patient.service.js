@@ -15,7 +15,7 @@ async function createNewPatient(userId, patient) {
   // }
   const newPatient = new Patient(patient);
   await newPatient.save();
-  await addNewPatientToUser(userId, newPatient._id);
+  await addNewPatientToUser(userId, newPatient.id);
 
   return newPatient;
 }
@@ -50,10 +50,24 @@ async function deletePatient(id) {
   return appointmentToDelete;
 }
 
+async function addNewAppointmentToPatient(patientId, appointmentId) {
+  const updatedPatient = await Patient
+    .findByIdAndUpdate(patientId, { $push: { appointments: appointmentId } }, { new: true });
+  console.log(updatedPatient);
+  return updatedPatient;
+}
+
+async function getListAppointmentsByPatientId(patientId) {
+  const patient = await Patient.findById(patientId).populate('appointments');
+  return patient.appointments;
+}
+
 module.exports = {
   updatePatient,
   createNewPatient,
   getPatientById,
   getAllPatients,
   deletePatient,
+  addNewAppointmentToPatient,
+  getListAppointmentsByPatientId,
 };
