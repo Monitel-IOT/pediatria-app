@@ -10,5 +10,6 @@ router.get('/:id', userController.getUserByIdHandler);
 router.put('/:id', userController.updateUserByIdHandler);
 router.get('', authenticate, userController.getAllUsersHandler);
 router.post('', userController.createNewUserHandler);
+router.get('/firebase/:firebaseId', userController.getUserByFirebaseIdHandler);
 
 module.exports = router;
