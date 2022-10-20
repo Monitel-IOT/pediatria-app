@@ -59,6 +59,16 @@ async function getListPatientsByUserId(userId) {
   return user.patients;
 }
 
+async function getUserByFirebaseId(firebaseId) {
+  const user = await User.findOne({ firebaseId });
+  if (!user) {
+    return {
+      msg: 'Not found',
+    };
+  }
+  return user;
+}
+
 module.exports = {
   updateUser,
   createNewUser,
@@ -67,4 +77,5 @@ module.exports = {
   addNewPatientToUser,
   getListPatientsByUserId,
   deleteLogicUser,
+  getUserByFirebaseId,
 };

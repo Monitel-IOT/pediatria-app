@@ -1,6 +1,7 @@
 const firebaseAdmin = require('../../../config/firebase');
 const {
-  getAllUsers, createNewUser, getListPatientsByUserId, getUserById, updateUser, deleteLogicUser,
+  getAllUsers, createNewUser, getListPatientsByUserId, getUserById,
+  updateUser, deleteLogicUser, getUserByFirebaseId,
 } = require('../services/user.service');
 
 const getAllUsersHandler = async (req, res, next) => {
@@ -122,6 +123,19 @@ const getAllPatientsByUserIdHandler = async (req, res, next) => {
   }
 };
 
+const getUserByFirebaseIdHandler = async (req, res, next) => {
+  try {
+    const { firebaseId } = req.params;
+    const user = await getUserByFirebaseId(firebaseId);
+    res.status(200).json({
+      data: user,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllUsersHandler,
   createNewUserHandler,
@@ -129,4 +143,5 @@ module.exports = {
   getAllPatientsByUserIdHandler,
   updateUserByIdHandler,
   deleteUserByIdHandler,
+  getUserByFirebaseIdHandler,
 };
