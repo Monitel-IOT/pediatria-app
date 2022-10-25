@@ -19,9 +19,9 @@ const getAllPatientHandler = async (req, res, next) => {
 const createPatientToUserHandler = async (req, res, next) => {
   try {
     const patient = req.body;
-    const userId = req.params.id;
+    const { id } = req.user;
 
-    const newPatient = await createNewPatient(userId, patient);
+    const newPatient = await createNewPatient(id, patient);
     res.status(200).json({
       data: newPatient,
       status: 'OK',
