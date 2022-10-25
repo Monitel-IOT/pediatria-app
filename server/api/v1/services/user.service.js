@@ -41,7 +41,7 @@ async function updateUser(id, user) {
 async function addNewPatientToUser(userId, patientId) {
   const updatedUser = await User
     .findByIdAndUpdate(userId, { $push: { patients: patientId } }, { new: true });
-  console.log(updatedUser);
+  // console.log(updatedUser);
   return updatedUser;
 }
 
