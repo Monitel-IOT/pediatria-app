@@ -31,7 +31,6 @@ async function getPatientById(id) {
 }
 
 async function updatePatient(id, patient) {
-  console.log(id, patient);
   const newPatient = await Patient.findByIdAndUpdate(id, patient, { new: true });
   return newPatient;
 }
