@@ -112,8 +112,8 @@ const deleteUserByIdHandler = async (req, res, next) => {
  */
 const getAllPatientsByUserIdHandler = async (req, res, next) => {
   try {
-    const userId = req.params.id;
-    const patients = await getListPatientsByUserId(userId);
+    const { id } = req.user;
+    const patients = await getListPatientsByUserId(id);
     res.status(200).json({
       data: patients,
       status: 'OK',
