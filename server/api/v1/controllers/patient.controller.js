@@ -7,6 +7,7 @@ const {
   getListAppointmentsByPatientId,
   updatePatient,
 } = require('../services/patient.service');
+const { getListPatientsByUserId } = require('../services/user.service');
 
 const getAllPatientHandler = async (req, res, next) => {
   try {
@@ -16,7 +17,6 @@ const getAllPatientHandler = async (req, res, next) => {
       status: 'OK',
     });
   } catch (error) {
-    console.log({ error });
     next(error);
   }
 };
@@ -67,11 +67,9 @@ const getPatientByIdHandler = async (req, res, next) => {
 const deletePatientHandler = async (req, res, next) => {
   try {
     const userId = req.params.id;
-    console.log(userId);
     await deletePatient(userId);
     res.status(200).json({ msg: 'Appointment deleted' });
   } catch (error) {
-    console.log({ error });
     next(error);
   }
 };
@@ -89,6 +87,25 @@ const getAllAppointmentsByPatientHandler = async (req, res, next) => {
   }
 };
 
+/**
+ * Controller to return all patients by user id
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+const getAllPatientsByUserIdHandler = async (req, res, next) => {
+  try {
+    const { id } = req.user;
+    const patients = await getListPatientsByUserId(id);
+    res.status(200).json({
+      data: patients,
+      status: 'OK',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllPatientHandler,
   createPatientToUserHandler,
@@ -96,4 +113,5 @@ module.exports = {
   deletePatientHandler,
   getAllAppointmentsByPatientHandler,
   editPatientToUserHandler,
+  getAllPatientsByUserIdHandler,
 };

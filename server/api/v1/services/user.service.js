@@ -29,7 +29,6 @@ async function deleteLogicUser(id) {
     { $set: { state: 0 } },
     { new: true },
   );
-  console.log(newUser);
   return newUser;
 }
 
@@ -41,7 +40,6 @@ async function updateUser(id, user) {
 async function addNewPatientToUser(userId, patientId) {
   const updatedUser = await User
     .findByIdAndUpdate(userId, { $push: { patients: patientId } }, { new: true });
-  // console.log(updatedUser);
   return updatedUser;
 }
 
