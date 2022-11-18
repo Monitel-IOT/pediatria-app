@@ -47,11 +47,9 @@ const updateAppointmentHandler = async (req, res, next) => {
 const deleteAppointmentHandler = async (req, res, next) => {
   try {
     const appointmentId = req.params.id;
-    console.log(appointmentId);
     await deleteAppointment(appointmentId);
     res.status(200).json({ msg: 'Appointment deleted' });
   } catch (error) {
-    console.log({ error });
     next(error);
   }
 };
