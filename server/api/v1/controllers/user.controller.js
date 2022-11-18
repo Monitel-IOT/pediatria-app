@@ -1,6 +1,6 @@
 const firebaseAdmin = require('../../../config/firebase');
 const {
-  getAllUsers, createNewUser, getListPatientsByUserId, getUserById,
+  getAllUsers, createNewUser, getUserById,
   updateUser, deleteLogicUser, getUserByFirebaseId,
 } = require('../services/user.service');
 
@@ -92,32 +92,10 @@ const updateUserByIdHandler = async (req, res, next) => {
  * @param {*} next
  */
 const deleteUserByIdHandler = async (req, res, next) => {
-  console.log('aqui');
   try {
     const userId = req.params.id;
-    console.log(userId);
     await deleteLogicUser(userId);
     res.status(200).json({ msg: 'User deleted' });
-  } catch (error) {
-    console.log({ error });
-    next(error);
-  }
-};
-
-/**
- * Controller to return all patients by user id
- * @param {*} req
- * @param {*} res
- * @param {*} next
- */
-const getAllPatientsByUserIdHandler = async (req, res, next) => {
-  try {
-    const { id } = req.user;
-    const patients = await getListPatientsByUserId(id);
-    res.status(200).json({
-      data: patients,
-      status: 'OK',
-    });
   } catch (error) {
     next(error);
   }
@@ -140,7 +118,6 @@ module.exports = {
   getAllUsersHandler,
   createNewUserHandler,
   getUserByIdHandler,
-  getAllPatientsByUserIdHandler,
   updateUserByIdHandler,
   deleteUserByIdHandler,
   getUserByFirebaseIdHandler,
