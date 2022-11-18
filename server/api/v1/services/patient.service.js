@@ -52,7 +52,6 @@ async function deletePatient(id) {
 async function addNewAppointmentToPatient(patientId, appointmentId) {
   const updatedPatient = await Patient
     .findByIdAndUpdate(patientId, { $push: { appointments: appointmentId } }, { new: true });
-  console.log(updatedPatient);
   return updatedPatient;
 }
 
