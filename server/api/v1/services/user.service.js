@@ -1,6 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 const User = require('../models/user.model');
 
+async function getUserByEmail(email) {
+  return User.findOne({ email });
+}
+
 async function createNewUser(user) {
   let newUser = await User.findOne({ email: user.email }) || null;
   /* if (newUser !== null) {
@@ -68,6 +72,7 @@ async function getUserByFirebaseId(firebaseId) {
 }
 
 module.exports = {
+  getUserByEmail,
   updateUser,
   createNewUser,
   getUserById,
