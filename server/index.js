@@ -42,6 +42,7 @@ app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
 // Routes
+app.get('/', (req, res) => res.send(process.env));
 app.use('/api/v1', api);
 
 app.use(notFound);
