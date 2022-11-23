@@ -20,7 +20,7 @@ const PRIVATE_KEY = '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAA
 const config = {
   currentEnviroment: process.env.NODE_ENV,
   port: process.env.PORT || 5000,
-  jwtsecret: 'Your secret is here',
+  jwtsecret: 'Your secret',
   database: {
     name: getEnv(),
     url: process.env.DATABASE_URL || 'mongodb+srv://monitel_iot:monitel2022@pediatria-app.5fbhx.mongodb.net',
