@@ -4,13 +4,13 @@ const getEnv = () => {
   let databaseUrl;
   console.log('NODE ENV', process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'development') {
-    databaseUrl = process.env.DATABASE_DEV;
+    databaseUrl = process.env.DATABASE_DEV || 'pediatriaDev';
   }
   if (process.env.NODE_ENV === 'test') {
-    databaseUrl = process.env.DATABASE_TEST;
+    databaseUrl = process.env.DATABASE_TEST || 'pediatriaTest';
   }
   if (process.env.NODE_ENV === 'production') {
-    databaseUrl = process.env.DATABASE_PRODUCTION;
+    databaseUrl = process.env.DATABASE_PRODUCTION || 'pediatriaProd';
   }
   return databaseUrl;
 };
@@ -23,7 +23,7 @@ const config = {
   jwtsecret: 'Your secret is here',
   database: {
     name: getEnv(),
-    url: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL || 'mongodb+srv://monitel_iot:monitel2022@pediatria-app.5fbhx.mongodb.net',
   },
   firebase: {
     type: process.env.TYPE || 'service_account',
