@@ -27,7 +27,7 @@ const config = {
   },
   firebase: {
     type: process.env.TYPE,
-    projectId: process.env.PROJECT_ID,
+    projectId: process.env.APPSETTING_PROJECT_ID,
     privateKeyId: process.env.PRIVATE_KEY_ID,
     privateKey: PRIVATE_KEY,
     clientEmail: process.env.CLIENT_EMAIL,
