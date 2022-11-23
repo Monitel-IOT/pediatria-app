@@ -6,8 +6,8 @@ const { connect: connectSocket, socket } = require('./server/config/socket');
 
 const { database, port } = config;
 
-console.log('proccess nev', process.env);
-// console.log('Initial config', config);
+// console.log('proccess nev', process.env);
+console.log('Initial config', config);
 
 connect({
   databaseName: database.name,
