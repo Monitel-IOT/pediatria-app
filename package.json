@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "start": "node index.js",
-    "build": "cross-env NODE_ENV=production node index.js",
+    "build": "node index.js",
     "test": "cross-env NODE_ENV=test jest --verbose test/Appointment.test.js",
     "test:watch": "npm run test -- --watch"
   },
