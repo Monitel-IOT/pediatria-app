@@ -27,7 +27,7 @@ const config = {
   },
   firebase: {
     type: process.env.TYPE || 'service_account',
-    projectId: process.env.APPSETTING_PROJECT_ID || 'pediatria-app',
+    projectId: process.env.APPSETTING_PROJECT_ID,
     privateKeyId: process.env.PRIVATE_KEY_ID || 'aa3c52de9215e68d3b65e33c2a1ed1708a1e58ba',
     privateKey: PRIVATE_KEY,
     clientEmail: process.env.CLIENT_EMAIL || 'firebase-adminsdk-b4jvx@pediatria-app.iam.gserviceaccount.com',
