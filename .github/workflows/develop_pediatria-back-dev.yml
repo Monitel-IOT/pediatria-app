@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_35ae7ba50c28464b9f43795df5b63d7d }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_1320c6ca3e3b465580a9cda61815af4e }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_48d761c5f7c1412ca423932090a16d67 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_3ffeddb388ee46f4853c0da783585258 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_35ae7ba50c28464b9f43795df5b63d7d }}/torvic130111/pediatria-app:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_48d761c5f7c1412ca423932090a16d67 }}/torvic130111/pediatria-app:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'pediatria-back-dev'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_d07fa77e536345ebafd6b46bd92d008b }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_35ae7ba50c28464b9f43795df5b63d7d }}/torvic130111/pediatria-app:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6eed2a979c7a4c07aaa61ac85a09007b }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_48d761c5f7c1412ca423932090a16d67 }}/torvic130111/pediatria-app:${{ github.sha }}'
