@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_725144ec0204473cbcc2be41c3a8d77b }}/torvic130111/pediatria-app:${{ github.sha }}
+        tags: torvic130111/pediatria-app:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'pediatria-back-dev'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_a9dff149852944cea31b1d74876e84cc }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_725144ec0204473cbcc2be41c3a8d77b }}/torvic130111/pediatria-app:${{ github.sha }}'
+        images: 'torvic130111/pediatria-app:${{ github.sha }}'
