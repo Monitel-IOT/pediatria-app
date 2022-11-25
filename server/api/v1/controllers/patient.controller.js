@@ -7,6 +7,7 @@ const {
   getListAppointmentsByPatientId,
   updatePatient,
 } = require('../services/patient.service');
+const { getListPatientsByUserId } = require('../services/user.service');
 
 const getAllPatientHandler = async (req, res, next) => {
   try {
@@ -54,6 +55,13 @@ const editPatientToUserHandler = async (req, res, next) => {
 const getPatientByIdHandler = async (req, res, next) => {
   try {
     const { id } = req.params;
+    const userAuthenticated = req.user;
+
+    const patients = await getListPatientsByUserId(userAuthenticated.id);
+    if (patients.findIndex((x) => x.id === id) === -1) {
+      throw Error('patient not found');
+    }
+
     const patient = await getPatientById(id);
     res.status(200).json({
       data: patient,
