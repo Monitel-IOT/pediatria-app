@@ -13,6 +13,7 @@ const createNewAppointmentHandler = async (req, res, next) => {
       status: 'OK',
     });
   } catch (error) {
+    console.log('eorr ', { error });
     next(error);
   }
 };

@@ -1,62 +1,28 @@
-POST http://localhost:5001/api/v1/appointment/634df7b9128e2ed1e2143f07 HTTP/1.1
+POST http://localhost:5001/api/v1/appointment/6359b971b24c7ac19db60444 HTTP/1.1
 content-type: application/json
 
 {
-    "appointmentDate": "2023/08/18",
-    "weight": 5.78,
-    "size": 78,
-    "age": "2 años",
-    "brainPerimeter": 15,
-    "bodyMassIndex": 5,
-    "prolongedDiagnosis":[
-        {
-            "diagnosis":"Diabetes",
-            "age": "3 meses"
-        },
-        {
-            "diagnosis":"No se",
-            "age": "2 meses"
-        }
-    ],
-    "characteristicsAttention":{
-        "sickTime":"3 dias",
-        "Relato": "Se encontraba con malestar general",
-        "Reevaluacion": "Se reevaluara en 3 dias"
-    },
-    "vitalFunctions": {
-        "fr":37,
-        "fc":15,
-        "t": 36,
-        "saturacion": 95
-    },
-    "diagnosis":[
-        {"diagnosticName":"Gripe"},
-        {"diagnosticName":"Infeccion estomacal"}
-    ],
-    "longTreatment":[
-        {
-            "longTreatmentName":"Eutirox",
-            "status": 1,
-            "suspensionDate":null
-        },
-        {
-            "longTreatmentName":"Ranttt",
-            "status": 1,
-            "suspensionDate":null
-        }
-    ],
-    "treatment":[
-        {"nameTreatment":"Ibuprofeno"},
-        {"nameTreatment":"Paracetamol"}
-    ],
-    "auxiliaryExams":[
-        {"exams":"Orina"},
-        {"exams":"Sangre"}
-    ],
-    "percentiles": {
-        "percentileWeight":37,
-        "heightPercentile":15,
-        "percentilMC": 36
-    },
-    "status": 1
+	"appointmentDate": "2023/08/18",
+	"weight": 5.78,
+	"size": 78,
+	"age": "2 años",
+	"brainPerimeter": 15,
+	"bodyMassIndex": 5,
+	"characteristicsAttention": {
+		"sickTime": "3 dias",
+		"story": "Se encontraba con malestar general",
+		"reevaluation": "Se reevaluara en 3 dias"
+	},
+	"vitalFunctions": {
+		"fr": 37,
+		"fc": 15,
+		"t": 36,
+		"saturacion": 95
+	},
+	"percentiles": {
+		"percentileWeight": 37,
+		"heightPercentile": 15,
+		"percentilMC": 36
+	},
+	"state": 1
 }
