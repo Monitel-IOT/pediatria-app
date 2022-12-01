@@ -33,9 +33,60 @@ async function deleteAppointment(id) {
   return appointmentToDelete;
 }
 
+async function addNewAuxiliaryExamToAppointment(appointmentId, auxiliaryExamId) {
+  const updatedAppointment = await Appointment
+    .findByIdAndUpdate(appointmentId, {
+      $push:
+      { auxiliaryExams: auxiliaryExamId },
+    }, { new: true });
+  return updatedAppointment;
+}
+
+async function addNewDiagnosisToAppointment(appointmentId, diagnosisId) {
+  const updatedAppointment = await Appointment
+    .findByIdAndUpdate(appointmentId, {
+      $push:
+      { diagnoses: diagnosisId },
+    }, { new: true });
+  return updatedAppointment;
+}
+
+async function addNewLongTreatmentToAppointment(appointmentId, longTreatmentId) {
+  const updatedAppointment = await Appointment
+    .findByIdAndUpdate(appointmentId, {
+      $push:
+      { longTreatments: longTreatmentId },
+    }, { new: true });
+  return updatedAppointment;
+}
+
+async function addNewProlongedDiagnosisToAppointment(appointmentId, prolongedDiagnosisId) {
+  const updatedAppointment = await Appointment
+    .findByIdAndUpdate(appointmentId, {
+      $push:
+      { prolongedDiagnoses: prolongedDiagnosisId },
+    }, { new: true });
+  return updatedAppointment;
+}
+
+async function addNewTreatmentToAppointment(appointmentId, treatmentId) {
+  const updatedAppointment = await Appointment
+    .findByIdAndUpdate(appointmentId, {
+      $push:
+      { treatments: treatmentId },
+    }, { new: true });
+  return updatedAppointment;
+}
+
 module.exports = {
   createNewAppointment,
   getAppointmentById,
   updateAppointment,
   deleteAppointment,
+
+  addNewAuxiliaryExamToAppointment,
+  addNewDiagnosisToAppointment,
+  addNewLongTreatmentToAppointment,
+  addNewProlongedDiagnosisToAppointment,
+  addNewTreatmentToAppointment,
 };
