@@ -8,8 +8,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env APPSETTING_NODE_ENV=development nodemon index.js",
-    "start": "cross-env APPSETTING_NODE_ENV=development node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "cross-env NODE_ENV=development node index.js",
     "test:watch": "npm run test -- --watch"
   },
   "keywords": [],
