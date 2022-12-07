@@ -3,13 +3,13 @@ require('dotenv').config();
 const getEnv = () => {
   let databaseUrl;
   console.log('NODE ENV', process.env.NODE_ENV);
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.APPSETTING_NODE_ENV === 'development') {
     databaseUrl = process.env.DATABASE_DEV || 'pediatriaDev';
   }
-  if (process.env.NODE_ENV === 'test') {
+  if (process.env.APPSETTING_NODE_ENV === 'test') {
     databaseUrl = process.env.DATABASE_TEST || 'pediatriaTest';
   }
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.APPSETTING_NODE_ENV === 'production') {
     databaseUrl = process.env.DATABASE_PRODUCTION || 'pediatriaProd';
   }
   return databaseUrl;
