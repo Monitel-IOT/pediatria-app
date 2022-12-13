@@ -58,7 +58,7 @@ async function getAllUsers() {
  */
 async function getListPatientsByUserId(userId) {
   const user = await User.findById(userId).populate('patients');
-  return user.patients;
+  return user.patients.filter((patient) => patient.state === true);
 }
 
 async function getUserByFirebaseId(firebaseId) {
