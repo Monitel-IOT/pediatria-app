@@ -10,7 +10,12 @@ async function createNewAppointment(patientId, appointment) {
 }
 
 async function getAppointmentById(id) {
-  const newAppointment = await Appointment.findById(id);
+  const newAppointment = await Appointment.findById(id)
+    .populate('auxiliaryExams')
+    .populate('diagnoses')
+    .populate('longTreatments')
+    .populate('prolongedDiagnoses')
+    .populate('treatments');
   if (!newAppointment) {
     return {
       msg: 'Not found',
