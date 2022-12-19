@@ -16,11 +16,11 @@ const router = express.Router();
 router.use('/user', userRouter);
 router.use('/patient', authenticate, patientRouter);
 
-router.use('/appointment', AppointmentRouter);
-router.use('/auxiliary-exam', AuxiliaryExamRouter);
-router.use('/diagnosis', DiagnosisRouter);
-router.use('/long-treatment', LongTreatmentRouter);
-router.use('/prolonged-diagnosis', ProlongedDiagnosisRouter);
-router.use('/treatment', TreatmentRouter);
+router.use('/appointment', authenticate, AppointmentRouter);
+router.use('/auxiliary-exam', authenticate, AuxiliaryExamRouter);
+router.use('/diagnosis', authenticate, DiagnosisRouter);
+router.use('/long-treatment', authenticate, LongTreatmentRouter);
+router.use('/prolonged-diagnosis', authenticate, ProlongedDiagnosisRouter);
+router.use('/treatment', authenticate, TreatmentRouter);
 
 module.exports = router;
