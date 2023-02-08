@@ -9,22 +9,16 @@ const appointmentSchema = mongoose.Schema({
   age: { type: String, require: false },
   brainPerimeter: { type: Number, require: false },
   bodyMassIndex: { type: Number, require: false },
-  characteristicsAttention: {
-    sickTime: { type: String, require: false },
-    story: { type: String, require: false },
-    reevaluation: { type: String, require: false },
-  },
-  vitalFunctions: {
-    fr: { type: Number, require: false },
-    fc: { type: Number, require: false },
-    t: { type: Number, require: false },
-    saturacion: { type: Number, require: false },
-  },
-  percentiles: {
-    percentileWeight: { type: Number, require: false },
-    heightPercentile: { type: Number, require: false },
-    percentilMC: { type: Number, require: false },
-  },
+  sickTime: { type: String, require: false },
+  story: { type: String, require: false },
+  reevaluation: { type: String, require: false },
+  fRespiratory: { type: Number, require: false },
+  fCardiac: { type: Number, require: false },
+  temperature: { type: Number, require: false },
+  saturacion: { type: Number, require: false },
+  percentileWeight: { type: Number, require: false },
+  heightPercentile: { type: Number, require: false },
+  percentilMC: { type: Number, require: false },
   state: { type: Boolean, require: true },
   prolongedDiagnoses: [
     {
