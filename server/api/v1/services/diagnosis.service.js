@@ -6,12 +6,16 @@ async function allDiagnosis() {
   return diagnoses;
 }
 
-async function createNewDiagnosis(appointmentId, diagnosis) {
-  const newDiagnosis = new Diagnosis(diagnosis);
-  await newDiagnosis.save();
-  await addNewDiagnosisToAppointment(appointmentId, newDiagnosis.id);
+async function createNewDiagnosis(appointmentId, diagnosisName, userId) {
+  try {
+    const newDiagnosis = new Diagnosis({ diagnosisName, userId });
+    await newDiagnosis.save();
+    await addNewDiagnosisToAppointment(appointmentId, newDiagnosis.id);
 
-  return newDiagnosis;
+    return newDiagnosis;
+  } catch (error) {
+    throw Error({ error });
+  }
 }
 
 module.exports = {
