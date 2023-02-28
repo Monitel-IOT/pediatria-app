@@ -15,8 +15,9 @@ const createTreatmentToAppointmentHandler = async (req, res, next) => {
   try {
     const treatment = req.body;
     const appointmentId = req.params.id;
+    const { id } = req.user;
 
-    const newTreatment = await createNewTreatment(appointmentId, treatment);
+    const newTreatment = await createNewTreatment(appointmentId, treatment, id);
     res.status(200).json({
       data: newTreatment,
       status: 'OK',

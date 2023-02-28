@@ -7,11 +7,15 @@ async function allLongTreatment() {
 }
 
 async function createNewLongTreatment(appointmentId, longTreatment) {
-  const newLongTreatment = new LongTreatment(longTreatment);
-  await newLongTreatment.save();
-  await addNewLongTreatmentToAppointment(appointmentId, newLongTreatment.id);
+  try {
+    const newLongTreatment = new LongTreatment(longTreatment);
+    await newLongTreatment.save();
+    await addNewLongTreatmentToAppointment(appointmentId, newLongTreatment.id);
 
-  return newLongTreatment;
+    return newLongTreatment;
+  } catch (error) {
+    throw Error({ error });
+  }
 }
 
 module.exports = {

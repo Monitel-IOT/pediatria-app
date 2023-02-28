@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const longTreatmentSchema = mongoose.Schema(
   {
     longTreatmentName: { type: String, require: false },
-    state: { type: Boolean, require: false },
     suspensionDate: { type: Date, require: false },
   },
   { timestamps: true },

@@ -7,11 +7,15 @@ async function allProlongedDiagnosis() {
 }
 
 async function createNewProlongedDiagnosis(appointmentId, prolongedDiagnosis) {
-  const newProlongedDiagnosis = new ProlongedDiagnosis(prolongedDiagnosis);
-  await newProlongedDiagnosis.save();
-  await addNewProlongedDiagnosisToAppointment(appointmentId, newProlongedDiagnosis.id);
+  try {
+    const newProlongedDiagnosis = new ProlongedDiagnosis(prolongedDiagnosis);
+    await newProlongedDiagnosis.save();
+    await addNewProlongedDiagnosisToAppointment(appointmentId, newProlongedDiagnosis.id);
 
-  return newProlongedDiagnosis;
+    return newProlongedDiagnosis;
+  } catch (error) {
+    throw Error({ error });
+  }
 }
 
 module.exports = {
