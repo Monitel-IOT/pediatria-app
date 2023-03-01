@@ -15,7 +15,8 @@ async function getAppointmentById(id) {
     .populate('diagnoses')
     .populate('longTreatments')
     .populate('prolongedDiagnoses')
-    .populate('treatments');
+    .populate('treatments')
+    .populate('symptoms');
   if (!newAppointment) {
     return {
       msg: 'Not found',
@@ -83,6 +84,15 @@ async function addNewTreatmentToAppointment(appointmentId, treatmentId) {
   return updatedAppointment;
 }
 
+async function addNewSymptomToAppointment(appointmentId, symptomId) {
+  const updatedAppointment = await Appointment
+    .findByIdAndUpdate(appointmentId, {
+      $push:
+      { symptoms: symptomId },
+    }, { new: true });
+  return updatedAppointment;
+}
+
 module.exports = {
   createNewAppointment,
   getAppointmentById,
@@ -94,4 +104,5 @@ module.exports = {
   addNewLongTreatmentToAppointment,
   addNewProlongedDiagnosisToAppointment,
   addNewTreatmentToAppointment,
+  addNewSymptomToAppointment,
 };

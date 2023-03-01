@@ -50,6 +50,12 @@ const appointmentSchema = mongoose.Schema({
       ref: 'AuxiliaryExam',
     },
   ],
+  symptoms: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Symptom',
+    },
+  ],
 }, { timestamps: true });
 
 appointmentSchema.set('toJSON', {

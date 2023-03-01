@@ -6,6 +6,7 @@ const { createNewDiagnosis } = require('../services/diagnosis.service');
 const { createNewProlongedDiagnosis } = require('../services/prolongedDiagnosis.service');
 const { createNewTreatment } = require('../services/treatment.service');
 const { createNewLongTreatment } = require('../services/longTreatment.service');
+const { createNewSymptom } = require('../services/symptom.service');
 
 const createNewAppointmentHandler = async (req, res, next) => {
   try {
@@ -18,6 +19,7 @@ const createNewAppointmentHandler = async (req, res, next) => {
     const { diagnoses } = req.body;
     const { prolongedDiagnoses } = req.body;
     const { longTreatments } = req.body;
+    const { symptoms } = req.body;
 
     const newAppointmentbody = {
       appointmentDate: appointment.appointmentDate,
@@ -80,7 +82,15 @@ const createNewAppointmentHandler = async (req, res, next) => {
 
     await Promise.all(promiseArrayLongTreatments);
 
-    const finalAppointment = getAppointmentById(newAppointment);
+    // Creando los sintomas
+    const promiseArraySymptoms = symptoms.map((symptom) => {
+      const newSymptom = createNewSymptom(newAppointment.id, symptom, id);
+      return newSymptom;
+    });
+
+    await Promise.all(promiseArraySymptoms);
+
+    const finalAppointment = await getAppointmentById(newAppointment);
 
     res.status(200).json({
       data: finalAppointment,
