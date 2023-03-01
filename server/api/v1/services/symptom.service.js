@@ -1,8 +1,8 @@
 const Symptom = require('../models/symptom.model');
 const { addNewSymptomToAppointment } = require('./appointment.service');
 
-async function allSymptoms() {
-  const diagnoses = await Symptom.find({}).sort({ date: -1 });
+async function allSymptoms(userId) {
+  const diagnoses = await Symptom.find({ userId }).sort({ date: -1 });
   return diagnoses;
 }
 

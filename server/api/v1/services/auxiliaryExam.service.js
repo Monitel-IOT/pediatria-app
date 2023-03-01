@@ -1,8 +1,8 @@
 const AuxiliaryExam = require('../models/auxiliaryExam.model');
 const { addNewAuxiliaryExamToAppointment } = require('./appointment.service');
 
-async function allAuxiliaryExams() {
-  const auxiliaryExams = await AuxiliaryExam.find({}).sort({ date: -1 });
+async function allAuxiliaryExams(userId) {
+  const auxiliaryExams = await AuxiliaryExam.find({ userId }).sort({ date: -1 });
   return auxiliaryExams;
 }
 

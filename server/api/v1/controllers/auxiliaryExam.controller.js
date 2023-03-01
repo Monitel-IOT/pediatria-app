@@ -2,7 +2,9 @@ const { allAuxiliaryExams, createNewAuxiliaryExam } = require('../services/auxil
 
 const getAllAuxiliaryExamsHandler = async (req, res, next) => {
   try {
-    const auxiliaryExams = await allAuxiliaryExams();
+    const { id } = req.user;
+
+    const auxiliaryExams = await allAuxiliaryExams(id);
     res.status(200).json({
       data: auxiliaryExams,
       status: 'OK',

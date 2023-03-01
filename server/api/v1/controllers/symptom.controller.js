@@ -2,9 +2,11 @@ const { allSymptoms } = require('../services/symptom.service');
 
 const getAllSymptomsHandler = async (req, res, next) => {
   try {
-    const diagnoses = await allSymptoms();
+    const { id } = req.user;
+    const symptoms = await allSymptoms(id);
+
     res.status(200).json({
-      data: diagnoses,
+      data: symptoms,
       status: 'OK',
     });
   } catch (error) {
