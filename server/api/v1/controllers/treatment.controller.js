@@ -2,7 +2,9 @@ const { allTreatments, createNewTreatment } = require('../services/treatment.ser
 
 const getAllTreatmentHandler = async (req, res, next) => {
   try {
-    const treatments = await allTreatments();
+    const { id } = req.user;
+
+    const treatments = await allTreatments(id);
     res.status(200).json({
       data: treatments,
       status: 'OK',

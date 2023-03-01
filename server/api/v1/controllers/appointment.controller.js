@@ -97,7 +97,6 @@ const createNewAppointmentHandler = async (req, res, next) => {
       status: 'OK',
     });
   } catch (error) {
-    console.log('error ', { error });
     next(error);
   }
 };

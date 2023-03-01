@@ -1,8 +1,8 @@
 const Treatment = require('../models/treatment.model');
 const { addNewTreatmentToAppointment } = require('./appointment.service');
 
-async function allTreatments() {
-  const treatments = await Treatment.find({}).sort({ date: -1 });
+async function allTreatments(userId) {
+  const treatments = await Treatment.find({ userId }).sort({ date: -1 });
   return treatments;
 }
 

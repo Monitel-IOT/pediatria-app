@@ -2,7 +2,9 @@ const { allDiagnosis, createNewDiagnosis } = require('../services/diagnosis.serv
 
 const getAllDiagnosisHandler = async (req, res, next) => {
   try {
-    const diagnoses = await allDiagnosis();
+    const { id } = req.user;
+
+    const diagnoses = await allDiagnosis(id);
     res.status(200).json({
       data: diagnoses,
       status: 'OK',
