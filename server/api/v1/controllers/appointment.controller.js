@@ -1,5 +1,12 @@
 const {
-  createNewAppointment, getAppointmentById, updateAppointment, deleteAppointment,
+  createNewAppointment,
+  getAppointmentById,
+  updateAppointment,
+  deleteAppointment,
+  addNewDiagnosisToAppointment,
+  addNewTreatmentToAppointment,
+  addNewSymptomToAppointment,
+  addNewAuxiliaryExamToAppointment,
 } = require('../services/appointment.service');
 const { createNewAuxiliaryExam } = require('../services/auxiliaryExam.service');
 const { createNewDiagnosis } = require('../services/diagnosis.service');
@@ -42,29 +49,99 @@ const createNewAppointmentHandler = async (req, res, next) => {
     };
     const newAppointment = await createNewAppointment(patientId, newAppointmentbody);
 
-    // Creando los Diagnosticos
-    const promiseArrayDiagnoses = diagnoses.map((diagnosis) => {
-      const newDiagnosis = createNewDiagnosis(newAppointment.id, diagnosis, id);
+    // *********************  Diagnosticos *******************************************
+    // *******************************************************************************
+    const diagnosesToAdd = diagnoses.filter((obj) => obj.id !== '');
+    const diagnosesToCreate = diagnoses.filter((obj) => obj.id === '');
+
+    // Agregando los Diagnosticos a la atencion
+    const promiseArrayDiagnosesToAdd = diagnosesToAdd.map((diagnosis) => {
+      const addDiagnosis = addNewDiagnosisToAppointment(newAppointment.id, diagnosis.id);
+      return addDiagnosis;
+    });
+
+    await Promise.all(promiseArrayDiagnosesToAdd);
+
+    // Creando los Diagnosticos y agrega a la atencion
+    const promiseArrayDiagnosesToCreate = diagnosesToCreate.map((diagnosis) => {
+      const newDiagnosis = createNewDiagnosis(newAppointment.id, diagnosis.diagnosisName, id);
       return newDiagnosis;
     });
 
-    await Promise.all(promiseArrayDiagnoses);
+    await Promise.all(promiseArrayDiagnosesToCreate);
+
+    // *********************  Tratamientos *******************************************
+    // *******************************************************************************
+    const TreatmentsToAdd = treatments.filter((obj) => obj.id !== '');
+    const TreatmentsToCreate = treatments.filter((obj) => obj.id === '');
+
+    // Agregando los tratamientos a la atencion
+    const promiseArrayTreatmentsToAdd = TreatmentsToAdd.map((treatment) => {
+      const addTreatments = addNewTreatmentToAppointment(newAppointment.id, treatment.id);
+      return addTreatments;
+    });
+
+    await Promise.all(promiseArrayTreatmentsToAdd);
 
     // Creando los tratamientos
-    const promiseArrayTreatments = treatments.map((treatment) => {
-      const newTreatment = createNewTreatment(newAppointment.id, treatment, id);
+    const promiseArrayTreatmentsTocreate = TreatmentsToCreate.map((treatment) => {
+      const newTreatment = createNewTreatment(newAppointment.id, treatment.nameTreatment, id);
       return newTreatment;
     });
 
-    await Promise.all(promiseArrayTreatments);
+    await Promise.all(promiseArrayTreatmentsTocreate);
+
+    // *********************  Examenes auxiliares ************************************
+    // *******************************************************************************
+    const auxiliaryExamsToAdd = auxiliaryExams.filter((obj) => obj.id !== '');
+    const auxiliaryExamsToCreate = auxiliaryExams.filter((obj) => obj.id === '');
+
+    // Agregando examenes auxiliares a la atencion
+    const promiseArrayAuxiliaryExamsToAdd = auxiliaryExamsToAdd.map((auxiliaryExam) => {
+      const addAuxiliaryExams = addNewAuxiliaryExamToAppointment(
+        newAppointment.id,
+        auxiliaryExam.id,
+      );
+      return addAuxiliaryExams;
+    });
+
+    await Promise.all(promiseArrayAuxiliaryExamsToAdd);
 
     // Creando los Examenes auxiliares
-    const promiseArrayAuxiliaryExams = auxiliaryExams.map((auxiliaryExam) => {
-      const newAuxiliaryExam = createNewAuxiliaryExam(newAppointment.id, auxiliaryExam, id);
+    const promiseArrayAuxiliaryExamsTocreate = auxiliaryExamsToCreate.map((auxiliaryExam) => {
+      const newAuxiliaryExam = createNewAuxiliaryExam(
+        newAppointment.id,
+        auxiliaryExam.nameAuxiliaryExam,
+        id,
+      );
       return newAuxiliaryExam;
     });
 
-    await Promise.all(promiseArrayAuxiliaryExams);
+    await Promise.all(promiseArrayAuxiliaryExamsTocreate);
+
+    // *********************  sintomas  **********************************************
+    // *******************************************************************************
+    const symptomsToAdd = symptoms.filter((obj) => obj.id !== '');
+    const symptomsToCreate = symptoms.filter((obj) => obj.id === '');
+
+    // Agregando sintomas a la atencion
+    const promiseSymptomsToAdd = symptomsToAdd.map((symptom) => {
+      const addSymptoms = addNewSymptomToAppointment(newAppointment.id, symptom.id);
+      return addSymptoms;
+    });
+
+    await Promise.all(promiseSymptomsToAdd);
+
+    // Creando los sintomas
+    const promiseArraySymptomsToCreate = symptomsToCreate.map((symptom) => {
+      const newSymptom = createNewSymptom(newAppointment.id, symptom.symptomName, id);
+      return newSymptom;
+    });
+
+    await Promise.all(promiseArraySymptomsToCreate);
+
+    // *********************  Diagnosticos Prolongados  ******************************
+    // *******************************************************************************
 
     // Creando los Diagnosticos Prolongados
     const promiseArrayProlongedDiagnoses = prolongedDiagnoses.map((prolongedDiagnosis) => {
@@ -74,6 +151,9 @@ const createNewAppointmentHandler = async (req, res, next) => {
 
     await Promise.all(promiseArrayProlongedDiagnoses);
 
+    // *********************  Tratamientos Largo  ******************************
+    // *******************************************************************************
+
     // Creando los tratamientos largos
     const promiseArrayLongTreatments = longTreatments.map((longTreatment) => {
       const newLongTreatment = createNewLongTreatment(newAppointment.id, longTreatment);
@@ -81,14 +161,6 @@ const createNewAppointmentHandler = async (req, res, next) => {
     });
 
     await Promise.all(promiseArrayLongTreatments);
-
-    // Creando los sintomas
-    const promiseArraySymptoms = symptoms.map((symptom) => {
-      const newSymptom = createNewSymptom(newAppointment.id, symptom, id);
-      return newSymptom;
-    });
-
-    await Promise.all(promiseArraySymptoms);
 
     const finalAppointment = await getAppointmentById(newAppointment);
 
