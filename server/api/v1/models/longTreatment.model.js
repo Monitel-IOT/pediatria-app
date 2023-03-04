@@ -6,6 +6,7 @@ const longTreatmentSchema = mongoose.Schema(
   {
     longTreatmentName: { type: String, require: false },
     suspensionDate: { type: Date, require: false },
+    condition: { type: String, require: false },
   },
   { timestamps: true },
 );

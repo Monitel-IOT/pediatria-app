@@ -16,17 +16,23 @@ const patientSchema = mongoose.Schema(
     supplementaryFeeding: { type: Boolean, required: false },
     lactation: { type: String, required: false },
     gestation: { type: String, required: false },
+    state: { type: Boolean, required: true },
     vaccines: [
       {
         _id: false,
         name: { type: String, required: false },
       },
     ],
-    state: { type: Boolean, required: true },
     appointments: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Appointment',
     }],
+    prolongedDiagnoses: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ProlongedDiagnosis',
+      },
+    ],
   },
   { timestamps: true },
 );

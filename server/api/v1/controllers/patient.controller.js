@@ -7,6 +7,7 @@ const {
   getListAppointmentsByPatientId,
   updatePatient,
 } = require('../services/patient.service');
+const { createNewProlongedDiagnosis } = require('../services/prolongedDiagnosis.service');
 const { getListPatientsByUserId } = require('../services/user.service');
 
 const getAllPatientHandler = async (req, res, next) => {
@@ -25,10 +26,42 @@ const createPatientToUserHandler = async (req, res, next) => {
   try {
     const patient = req.body;
     const { id } = req.user;
+    const { prolongedDiagnoses } = req.body;
 
-    const newPatient = await createNewPatient(id, patient);
+    const formPatient = {
+      dni: patient.dni,
+      name: patient.name,
+      lastname: patient.lastname,
+      birthDate: patient.birthDate,
+      gender: patient.gender,
+      birthWeight: patient.birthWeight,
+      childBirth: patient.childBirth,
+      apgar: patient.apgar,
+      supplementaryFeeding: patient.supplementaryFeeding,
+      lactation: patient.lactation,
+      gestation: patient.gestation,
+      state: true,
+      vaccines: [],
+      prolongedDiagnoses: [],
+    };
+
+    const newPatient = await createNewPatient(id, formPatient);
+
+    // *********************  Diagnosticos Prolongados  ******************************
+    // *******************************************************************************
+
+    // Creando los Diagnosticos Prolongados
+    const promiseArrayProlongedDiagnoses = prolongedDiagnoses.map((prolongedDiagnosis) => {
+      const newProlongedDiag = createNewProlongedDiagnosis(newPatient.id, prolongedDiagnosis);
+      return newProlongedDiag;
+    });
+
+    await Promise.all(promiseArrayProlongedDiagnoses);
+
+    const finalPatient = await getPatientById(newPatient);
+
     res.status(200).json({
-      data: newPatient,
+      data: finalPatient,
       status: 'OK',
     });
   } catch (error) {
