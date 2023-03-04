@@ -20,12 +20,6 @@ const appointmentSchema = mongoose.Schema({
   heightPercentile: { type: Number, require: false },
   percentilMC: { type: Number, require: false },
   state: { type: Boolean, require: true },
-  prolongedDiagnoses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'ProlongedDiagnosis',
-    },
-  ],
   diagnoses: [
     {
       type: mongoose.Schema.Types.ObjectId,

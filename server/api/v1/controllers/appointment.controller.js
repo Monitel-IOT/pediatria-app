@@ -10,7 +10,6 @@ const {
 } = require('../services/appointment.service');
 const { createNewAuxiliaryExam } = require('../services/auxiliaryExam.service');
 const { createNewDiagnosis } = require('../services/diagnosis.service');
-const { createNewProlongedDiagnosis } = require('../services/prolongedDiagnosis.service');
 const { createNewTreatment } = require('../services/treatment.service');
 const { createNewLongTreatment } = require('../services/longTreatment.service');
 const { createNewSymptom } = require('../services/symptom.service');
@@ -24,7 +23,6 @@ const createNewAppointmentHandler = async (req, res, next) => {
     const { treatments } = req.body;
     const { auxiliaryExams } = req.body;
     const { diagnoses } = req.body;
-    const { prolongedDiagnoses } = req.body;
     const { longTreatments } = req.body;
     const { symptoms } = req.body;
 
@@ -139,17 +137,6 @@ const createNewAppointmentHandler = async (req, res, next) => {
     });
 
     await Promise.all(promiseArraySymptomsToCreate);
-
-    // *********************  Diagnosticos Prolongados  ******************************
-    // *******************************************************************************
-
-    // Creando los Diagnosticos Prolongados
-    const promiseArrayProlongedDiagnoses = prolongedDiagnoses.map((prolongedDiagnosis) => {
-      const newProlongedDiag = createNewProlongedDiagnosis(newAppointment.id, prolongedDiagnosis);
-      return newProlongedDiag;
-    });
-
-    await Promise.all(promiseArrayProlongedDiagnoses);
 
     // *********************  Tratamientos Largo  ******************************
     // *******************************************************************************

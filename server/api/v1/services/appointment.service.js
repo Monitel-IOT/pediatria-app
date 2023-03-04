@@ -14,7 +14,6 @@ async function getAppointmentById(id) {
     .populate('auxiliaryExams')
     .populate('diagnoses')
     .populate('longTreatments')
-    .populate('prolongedDiagnoses')
     .populate('treatments')
     .populate('symptoms');
   if (!newAppointment) {

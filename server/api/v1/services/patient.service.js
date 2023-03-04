@@ -55,6 +55,16 @@ async function addNewAppointmentToPatient(patientId, appointmentId) {
   return updatedPatient;
 }
 
+async function addNewProlongedDiagnosisToPatient(patientId, prolongedDiagnosisId) {
+  const updatedPatient = await Patient
+    .findByIdAndUpdate(
+      patientId,
+      { $push: { prolongedDiagnoses: prolongedDiagnosisId } },
+      { new: true },
+    );
+  return updatedPatient;
+}
+
 async function getListAppointmentsByPatientId(patientId) {
   const patient = await Patient.findById(patientId).populate('appointments');
   return patient.appointments;
@@ -68,4 +78,5 @@ module.exports = {
   deletePatient,
   addNewAppointmentToPatient,
   getListAppointmentsByPatientId,
+  addNewProlongedDiagnosisToPatient,
 };
