@@ -9,7 +9,7 @@ const ERROR_HANDLERS = {
 
   defaultError: (res, error) => {
     console.error(error.name);
-    res.status(500).end();
+    res.status(500).json({ error }).end();
   },
 };
 
