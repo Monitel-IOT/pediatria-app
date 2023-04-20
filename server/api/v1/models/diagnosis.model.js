@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const diagnosisSchema = mongoose.Schema(
   {
-    diagnosisName: { type: String, require: false },
+    name: { type: String, require: false },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

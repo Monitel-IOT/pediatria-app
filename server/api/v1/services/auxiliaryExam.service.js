@@ -6,9 +6,9 @@ async function allAuxiliaryExams(userId) {
   return auxiliaryExams;
 }
 
-async function createNewAuxiliaryExam(appointmentId, nameAuxiliaryExam, userId) {
+async function createNewAuxiliaryExam(appointmentId, name, userId) {
   try {
-    const newAuxiliaryExam = new AuxiliaryExam({ nameAuxiliaryExam, userId });
+    const newAuxiliaryExam = new AuxiliaryExam({ name, userId });
     await newAuxiliaryExam.save();
     await addNewAuxiliaryExamToAppointment(appointmentId, newAuxiliaryExam.id);
 
@@ -18,7 +18,18 @@ async function createNewAuxiliaryExam(appointmentId, nameAuxiliaryExam, userId) 
   }
 }
 
+async function findAuxiliaryExam(name, userId) {
+  try {
+    const auxiliaryExam = await AuxiliaryExam.findOne({ name, userId });
+    return auxiliaryExam;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   allAuxiliaryExams,
   createNewAuxiliaryExam,
+  findAuxiliaryExam,
 };

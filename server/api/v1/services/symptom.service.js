@@ -6,9 +6,9 @@ async function allSymptoms(userId) {
   return diagnoses;
 }
 
-async function createNewSymptom(appointmentId, symptomName, userId) {
+async function createNewSymptom(appointmentId, name, userId) {
   try {
-    const newSymptom = new Symptom({ symptomName, userId });
+    const newSymptom = new Symptom({ name, userId });
     await newSymptom.save();
     await addNewSymptomToAppointment(appointmentId, newSymptom.id);
 
@@ -18,7 +18,18 @@ async function createNewSymptom(appointmentId, symptomName, userId) {
   }
 }
 
+async function findSymptom(name, userId) {
+  try {
+    const symptom = await Symptom.findOne({ name, userId });
+    return symptom;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   allSymptoms,
   createNewSymptom,
+  findSymptom,
 };
