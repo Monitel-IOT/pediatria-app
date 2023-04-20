@@ -6,9 +6,9 @@ async function allTreatments(userId) {
   return treatments;
 }
 
-async function createNewTreatment(appointmentId, nameTreatment, userId) {
+async function createNewTreatment(appointmentId, name, userId) {
   try {
-    const newTreatment = new Treatment({ nameTreatment, userId });
+    const newTreatment = new Treatment({ name, userId });
     await newTreatment.save();
     await addNewTreatmentToAppointment(appointmentId, newTreatment.id);
 
@@ -17,7 +17,19 @@ async function createNewTreatment(appointmentId, nameTreatment, userId) {
     throw Error({ error });
   }
 }
+
+async function findTreatment(name, userId) {
+  try {
+    const treatment = await Treatment.findOne({ name, userId });
+    return treatment;
+  } catch (error) {
+    console.log(error);
+    throw new Error(error);
+  }
+}
+
 module.exports = {
   allTreatments,
   createNewTreatment,
+  findTreatment,
 };
