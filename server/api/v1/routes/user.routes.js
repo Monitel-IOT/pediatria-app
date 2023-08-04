@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.delete('/:id', userController.deleteUserByIdHandler);
 router.get('/:id', userController.getUserByIdHandler);
-router.put('/:id', userController.updateUserByIdHandler);
+router.put('/:id', authenticate, userController.updateUserByIdHandler);
 router.get('', userController.getAllUsersHandler);
 router.post('', userController.createNewUserHandler);
 router.get('/firebase/:firebaseId', authenticate, userController.getUserByFirebaseIdHandler);
