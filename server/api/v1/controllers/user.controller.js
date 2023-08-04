@@ -17,7 +17,9 @@ const getAllUsersHandler = async (req, res, next) => {
 };
 
 const createNewUserHandler = async (req, res, next) => {
-  const { email, name, password } = req.body;
+  const {
+    email, name, password, surname, dni, phone,
+  } = req.body;
   try {
     const newFirebaseUser = await firebaseAdmin.auth.createUser({
       email,
@@ -28,6 +30,9 @@ const createNewUserHandler = async (req, res, next) => {
         email,
         name,
         firebaseId: newFirebaseUser.uid,
+        surname,
+        dni,
+        phone,
       });
 
       res.status(200).json({
@@ -35,6 +40,9 @@ const createNewUserHandler = async (req, res, next) => {
           id: newUser.id,
           email: newUser.email,
           firebaseId: newUser.firebaseId,
+          surname: newUser.surname,
+          dni: newUser.dni,
+          phone: newUser.phone,
         },
         success: 'Cuenta creada exitosamente, Por favor inicia sesión',
       });
